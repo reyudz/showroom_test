@@ -34,10 +34,10 @@ public class Main {
 		public void initialize(HttpRequest request) throws IOException {
 		}
 	};
-	
+
 	/** Youtubeオブジェクト */
 	private static YouTube youtube;
-	
+
 	/** YouTubeのURL */
 	private static final String YOUTUBE_URL = "http://www.youtube.com/watch?v=";
 
@@ -57,7 +57,7 @@ public class Main {
 			/* 事前準備 */
 			// YouTube用（資産管理しない）プロパティファイル読み込み
 			Properties properties = loadProperties(YOUTUBE_PROPFILE);
-			
+
 			// 初期化
 			youtube = new YouTube.Builder(HTTP_TRANSPORT, JSON_FACTORY, HTTP_REQUEST_INITIALIZER)
 					.setApplicationName("youtube-test").build();
@@ -66,11 +66,10 @@ public class Main {
 			HttpHeaders headers = new HttpHeaders().setContentType("application/json");
 
 			// 取得情報の設定
-	        search.setRequestHeaders(headers);
+			search.setRequestHeaders(headers);
 			search.setKey(properties.getProperty("youtube.apikey"));
 			search.setType(new ArrayList<>(Arrays.asList("video")));
 			search.setFields("items(id/videoId,snippet/title),nextPageToken");
-			
 
 			// 検索条件
 			// キーワード
@@ -79,20 +78,20 @@ public class Main {
 			search.setOrder("date");
 			// 1リクエストにおける取得件数
 			search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
-			
+
 			/* 検索 */
 			// 検索実行
 			SearchListResponse searchResponse = null;
 			List<SearchResult> searchResultList = new ArrayList<>();
 			do {
 				// 次ページ取得設定
-				if (searchResponse != null && searchResponse.getNextPageToken()!= null) {
+				if (searchResponse != null && searchResponse.getNextPageToken() != null) {
 					search.setPageToken(searchResponse.getNextPageToken());
-				}	
-				
+				}
+
 				searchResponse = search.execute();
 				searchResultList.addAll(searchResponse.getItems());
-				
+
 				// 100件取得できたら処理終了
 				if (searchResultList.size() >= 100) {
 					if (searchResultList.size() == 100) {

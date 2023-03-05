@@ -82,7 +82,7 @@ public class Main {
 			// 地域
 			search.setRegionCode(searchProp.getProperty("REGION_CODE"));
 			// 1リクエストにおける取得件数
-			search.setMaxResults(Long.parseLong(searchProp.getProperty("NUMBER_OF_VIDEOS_RETURNED")));			
+			search.setMaxResults(Long.parseLong(searchProp.getProperty("NUMBER_OF_VIDEOS_RETURNED")));
 
 			/* 検索 */
 			// 検索実行
@@ -139,7 +139,7 @@ public class Main {
 	private static String getPublishedAfter(int sub) {
 		Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
 		Date afterThreeDays = DateUtils.truncate(DateUtils.addDays(today, sub), Calendar.DAY_OF_MONTH);
-	
+
 		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(afterThreeDays);
 	}
 

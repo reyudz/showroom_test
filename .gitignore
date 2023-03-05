@@ -25,3 +25,4 @@ hs_err_pid*
 # secret properties
 youtube_showroom/bin/main/test/youtube_noupload.properties
 youtube_apex/src/main/java/test/youtube_secret.properties
+/.metadata/
